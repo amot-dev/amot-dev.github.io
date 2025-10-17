@@ -1,5 +1,15 @@
 {
 "projects": [
+    {
+		"visible": "true",
+		"title": "MotoTwist",
+		"language": "Python",
+		"github": "https://github.com/amot-dev/mototwist",
+		"site": "",
+		"photo": "img/projects/mototwist.png",
+		"description":
+		"MotoTwist is a self-hosted, containerized service to track and rate motorcycle roads. It allows you to rate routes on key criteria like scenery, road quality, and twistiness. Or, for the offroad enthusiasts, you can rate them on surface consistency, technicality, and general flow.\\n\\nStarted as a simple hobby project for me to keep track of my own favourite motorcycle roads, I quickly realized that beyond forums and some curated print media, there isn't a great place for motorcylists to share the hidden gems around them. So, I made it.\\n\\nMotoTwist has support for multiple users, search and filters to help users discover great roads, and new features are (as of now) constantly being added. Anyone can deploy an instance within minutes via Docker, and plans are underway for a central deployment."
+    },
 	{
 		"visible": "true",
 		"title": "Endshards",
