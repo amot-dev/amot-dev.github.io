@@ -29,16 +29,16 @@ function scrollFunction() {
 			title.classList.add('scrolled');
 			buttons.classList.add('scrolled');
 			// Wait until there's enough room for both title and navbar before completing button transition
-			setTimeout(function checkWidth() {
+			requestAnimationFrame(function checkWidth() {
 				var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
 				if (title.offsetWidth + buttons.offsetWidth < viewportWidth) {
 					buttons.classList.remove('display-transitioning');
 				}
 				// If there's no room, wait a bit and check again
 				else {
-					setTimeout(checkWidth, 50);
+					requestAnimationFrame(checkWidth);
 				}
-			}, 50);
+			});
 		}
 		else {
 			title.classList.add('scrolled');
@@ -53,16 +53,16 @@ function scrollFunction() {
 			title.classList.remove('scrolled');
 			buttons.classList.remove('scrolled');
 			// Wait until there's not enough room for both title and navbar before completing button transition
-			setTimeout(function checkWidth() {
+			requestAnimationFrame(function checkWidth() {
 				var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
 				if (title.offsetWidth + buttons.offsetWidth > viewportWidth) {
 					buttons.classList.remove('display-transitioning');
 				}
 				// If there's still room, wait a bit and check again
 				else {
-					setTimeout(checkWidth, 50);
+					requestAnimationFrame(checkWidth);
 				}
-			}, 50);
+			});
 		}
 		else {
 			title.classList.remove('scrolled');
