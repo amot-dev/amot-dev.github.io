@@ -6,13 +6,12 @@
 		- Minimum size to fit navbar and title in one row when scrolled: 551px
 		- Minimum size to fit navbar in one row: 366px
 */
+var title = document.getElementById('title');
+var buttons = document.getElementById('buttons');
 window.onscroll = function () {
   scrollFunction();
 };
 function scrollFunction() {
-  var title = document.getElementById('title');
-  var buttons = document.getElementById('buttons');
-
   // Scrolling down
   if (document.body.scrollTop > 0.8 * window.innerHeight || document.documentElement.scrollTop > 0.8 * window.innerHeight) {
     // Need to transition display style between 551px and 805px (done by making buttons transparent during display change)
