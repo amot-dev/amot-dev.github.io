@@ -1,3 +1,5 @@
+"use strict";
+
 /* 	Scroll Animations
 	Some important screen widths (need to be updated if header is updated, here and in CSS):
 		- Minimum size to fit navbar and title in one row when not scrolled: 806px
@@ -125,6 +127,7 @@ function renderProjects(data) {
     description
   }, index) => {
     return /*#__PURE__*/React.createElement(Project, {
+      key: title,
       visible: visible,
       title: title,
       lang: language,

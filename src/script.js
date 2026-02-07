@@ -116,7 +116,7 @@ function renderProjects(data) {
 	const root = ReactDOM.createRoot(document.getElementById('reactapp'))
 	let elements = []
 	elements = data.projects.map(({visible, title, language, github, site, photo, description}, index) => {
-		return <Project visible={visible} title={title} lang={language} github={github} site={site} photo={photo} desc={description} />
+		return <Project key={title} visible={visible} title={title} lang={language} github={github} site={site} photo={photo} desc={description} />
 	})
 	root.render(elements);
 }
