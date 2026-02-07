@@ -216,14 +216,17 @@ function Project(props) {
   }), props.site == "" ? /*#__PURE__*/React.createElement("a", {
     className: "site button",
     href: props.github,
-    target: "_blank"
+    target: "_blank",
+    rel: "noopener noreferrer"
   }, "See it on GitHub") : /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("a", {
     className: "site site-left button",
     href: props.github,
-    target: "_blank"
+    target: "_blank",
+    rel: "noopener noreferrer"
   }, "See it on GitHub"), /*#__PURE__*/React.createElement("a", {
     className: "site site-right button",
     href: props.site,
-    target: "_blank"
+    target: "_blank",
+    rel: "noopener noreferrer"
   }, "Try it out!"))));
 }
