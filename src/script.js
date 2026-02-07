@@ -7,7 +7,16 @@
 var title = document.getElementById('title');
 var buttons = document.getElementById('buttons');
 
-window.onscroll = function() {scrollFunction()};
+let ticking = false;
+window.onscroll = function() {
+	if (!ticking) {
+		window.requestAnimationFrame(function() {
+			scrollFunction();
+			ticking = false;
+		});
+		ticking = true;
+	}
+};
 function scrollFunction() {
 
 	// Scrolling down
