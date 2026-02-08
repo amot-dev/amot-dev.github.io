@@ -36,7 +36,7 @@ function scrollFunction() {
 				if (title.offsetWidth + buttons.offsetWidth < viewportWidth) {
 					buttons.classList.remove('display-transitioning');
 				}
-				// If there's no room, wait a bit and check again
+				// If there's no room, check again on next animation frame
 				else {
 						requestAnimationFrame(checkWidth);
 					}
@@ -59,7 +59,7 @@ function scrollFunction() {
 					if (title.offsetWidth + buttons.offsetWidth > viewportWidth) {
 						buttons.classList.remove('display-transitioning');
 					}
-					// If there's still room, wait a bit and check again
+					// If there's still room, check again on next animation frame
 					else {
 							requestAnimationFrame(checkWidth);
 						}
