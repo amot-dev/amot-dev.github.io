@@ -256,6 +256,7 @@ nav {
 .featured-image {
 	display: block;
 	width: 100%;
+	height: auto;
 }
 
 .desc {
