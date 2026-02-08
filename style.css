@@ -62,13 +62,13 @@ nav {
 	font-size: 1.5rem;
 }
 
-@media (min-width: 651px) {
+@media (min-width: 551px) {
 	#title.scrolled {
 		display: inline-block;
 	}
 }
 
-@media (min-width: 906px) {
+@media (min-width: 806px) {
 	#title:not(.scrolled) {
 		display: inline-block;
 	}
@@ -81,13 +81,13 @@ nav {
 	transition: 0.2s;
 }
 
-@media (min-width: 651px) {
+@media (min-width: 551px) {
 	#buttons.scrolled {
 		display: inline-block;
 	}
 }
 
-@media (min-width: 906px) {
+@media (min-width: 806px) {
 	#buttons:not(.scrolled) {
 		display: inline-block;
 	}
@@ -104,7 +104,7 @@ nav {
 .button {
 	display: inline-block;
 	overflow: hidden;
-	padding: 0.5rem;
+	padding: 0.65625rem 0.5rem;
 	border: none;
 	text-align: center;
 	text-decoration: none;
@@ -136,7 +136,7 @@ nav {
 	white-space: nowrap;
 }
 
-@media (min-width: 651px) {
+@media (min-width: 551px) {
 	#buttons.scrolled .social-group {
 		display: inline-block;
 	}
@@ -144,7 +144,7 @@ nav {
 
 .social {
 	vertical-align: middle;
-	padding: 0.5rem;
+	padding: 0.65625rem 0.5rem;
 	/* Fix for extra height added by vertical alignment of SVG */
 	line-height: 0;
 }
