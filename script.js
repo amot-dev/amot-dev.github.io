@@ -236,19 +236,19 @@ function Project(props) {
 			React.createElement('p', { className: 'desc', dangerouslySetInnerHTML: { __html: props.desc.replace(/\\n/g, '<br />') } }),
 			props.site == "" ? React.createElement(
 				'a',
-				{ className: 'site button', href: props.github, target: '_blank', rel: 'noopener noreferrer' },
+				{ className: 'site button', href: props.github, target: '_blank', rel: 'noopener noreferrer', 'aria-label': 'See ' + props.title + ' on GitHub' },
 				'See it on GitHub'
 			) : React.createElement(
 				'div',
 				null,
 				React.createElement(
 					'a',
-					{ className: 'site site-left button', href: props.github, target: '_blank', rel: 'noopener noreferrer' },
+					{ className: 'site site-left button', href: props.github, target: '_blank', rel: 'noopener noreferrer', 'aria-label': 'See ' + props.title + ' on GitHub' },
 					'See it on GitHub'
 				),
 				React.createElement(
 					'a',
-					{ className: 'site site-right button', href: props.site, target: '_blank', rel: 'noopener noreferrer' },
+					{ className: 'site site-right button', href: props.site, target: '_blank', rel: 'noopener noreferrer', 'aria-label': 'Try out ' + props.title },
 					'Try it out!'
 				)
 			)

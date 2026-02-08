@@ -190,10 +190,10 @@ function Project(props) {
 				
 				<p className="desc" dangerouslySetInnerHTML={{ __html: props.desc.replace(/\\n/g, '<br />') }}></p>
 				{props.site == ""
-					? <a className="site button" href={props.github} target="_blank" rel="noopener noreferrer">See it on GitHub</a>
+					? <a className="site button" href={props.github} target="_blank" rel="noopener noreferrer" aria-label={`See ${props.title} on GitHub`}>See it on GitHub</a>
 					: <div>
-						<a className="site site-left button" href={props.github} target="_blank" rel="noopener noreferrer">See it on GitHub</a>
-						<a className="site site-right button" href={props.site} target="_blank" rel="noopener noreferrer">Try it out!</a>
+						<a className="site site-left button" href={props.github} target="_blank" rel="noopener noreferrer" aria-label={`See ${props.title} on GitHub`}>See it on GitHub</a>
+						<a className="site site-right button" href={props.site} target="_blank" rel="noopener noreferrer" aria-label={`Try out ${props.title}`}>Try it out!</a>
 					  </div>
 				}
 			</div>
