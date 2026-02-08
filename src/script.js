@@ -71,70 +71,12 @@ function scrollFunction() {
 	}
 }
 
-// Make cards in the same row equal heights
-function setEqualHeight() {
-	const gridItems = document.querySelectorAll('.grid-item');
-	let start = 0;
-	let end;
-	let maxHeight = 0;
-
-	// Get number of grid items in a row
-	let itemsPerRow;
-	if (window.matchMedia('(min-width: 1000px)').matches) {
-		itemsPerRow = 3;
-	} else if (window.matchMedia('(min-width: 600px)').matches) {
-		itemsPerRow = 2;
-	} else {
-		itemsPerRow = 1;
-	}
-
-	// Iterate through grid items, row by row
-	while (start < gridItems.length) {
-		// Set end of current row
-		end = start + itemsPerRow;
-
-		// Reset card and description heights to auto
-		for (let i = start; i < end && i < gridItems.length; i++) {
-			const card = gridItems[i].querySelector('.card');
-			const desc = gridItems[i].querySelector('.desc');
-			card.style.height = 'auto';
-			desc.style.height = 'auto';
-		}
-
-		// Find max card height in row
-		for (let i = start; i < end && i < gridItems.length; i++) {
-			const card = gridItems[i].querySelector('.card');
-			maxHeight = Math.max(maxHeight, card.offsetHeight);
-		}
-
-		// Set all description heights in a row such that the cards in that row are the same height
-		const descriptions = [];
-		for (let i = start; i < end && i < gridItems.length; i++) {
-			const card = gridItems[i].querySelector('.card');
-			const desc = gridItems[i].querySelector('.desc');
-			descriptions.push({
-				element: desc,
-				height: (maxHeight + desc.offsetHeight - card.offsetHeight)
-			});
-		}
-
-		for (const desc of descriptions) {
-			desc.element.style.height = desc.height + 'px';
-		}
-
-		// Move to next row
-		maxHeight = 0;
-		start = end;
-	}
-}
-window.addEventListener('resize', setEqualHeight);
-
 // Render React elements from projects.json
 function renderProjects(data) {
 	const root = ReactDOM.createRoot(document.getElementById('reactapp'))
 	let elements = []
-	elements = data.projects.map(({visible, title, language, github, site, photo, alt, description}, index) => {
-		return <Project key={title} visible={visible} title={title} lang={language} github={github} site={site} photo={photo} alt={alt} desc={description} />
+	elements = data.projects.map(({visible, title, language, github, site, photo, alt, description, width, height}, index) => {
+		return <Project key={title} visible={visible} title={title} lang={language} github={github} site={site} photo={photo} alt={alt} desc={description} width={width} height={height} />
 	})
 	root.render(elements);
 }
@@ -155,27 +97,9 @@ function setTextColor(language) {
 
 // Define React Component
 function Project(props) {
-	// Ref to track the total number of images to be loaded
-	const totalImagesRef = React.useRef(0);
-	// Ref to track the count of loaded images
-	const loadedImagesRef = React.useRef(0);
-  
-	// Increment the loaded image count and check if all images are loaded
-	const handleImageLoad = () => {
-	  loadedImagesRef.current += 1;
-
-	  // Call setEqualHeight once all images are loaded
-	  if (loadedImagesRef.current === totalImagesRef.current) {
-		setEqualHeight();
-	  }
-	};
-	
 	// Skip rendering elements not set to visible and elements with an empty description
 	if (props.visible == "false" || props.desc == "") return null;
 
-	// Increment total image count if there's an image
-	if (props.photo !== "") totalImagesRef.current += 1;
-	
 	// Template for cards
 	return (
 		<div className="grid-item">
@@ -185,7 +109,7 @@ function Project(props) {
 					<h3 className="language" style={setTextColor(props.lang)}>{props.lang}</h3>
 				</div>
 				{props.photo != "" &&
-					<img className="featured-image" src={props.photo} alt={props.alt} onLoad={handleImageLoad}></img>
+					<img className="featured-image" src={props.photo} alt={props.alt} loading="lazy" decoding="async" width={props.width} height={props.height}></img>
 				}
 				
 				<p className="desc" dangerouslySetInnerHTML={{ __html: props.desc.replace(/\\n/g, '<br />') }}></p>
