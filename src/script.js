@@ -133,8 +133,8 @@ window.addEventListener('resize', setEqualHeight);
 function renderProjects(data) {
 	const root = ReactDOM.createRoot(document.getElementById('reactapp'))
 	let elements = []
-	elements = data.projects.map(({visible, title, language, github, site, photo, description}, index) => {
-		return <Project key={title} visible={visible} title={title} lang={language} github={github} site={site} photo={photo} desc={description} />
+	elements = data.projects.map(({visible, title, language, github, site, photo, alt, description}, index) => {
+		return <Project key={title} visible={visible} title={title} lang={language} github={github} site={site} photo={photo} alt={alt} desc={description} />
 	})
 	root.render(elements);
 }
@@ -185,15 +185,15 @@ function Project(props) {
 					<h3 className="language" style={setTextColor(props.lang)}>{props.lang}</h3>
 				</div>
 				{props.photo != "" &&
-					<img className="featured-image" src={props.photo} onLoad={handleImageLoad}></img>
+					<img className="featured-image" src={props.photo} alt={props.alt} onLoad={handleImageLoad}></img>
 				}
 				
 				<p className="desc" dangerouslySetInnerHTML={{ __html: props.desc.replace(/\\n/g, '<br />') }}></p>
 				{props.site == ""
-					? <a className="site button" href={props.github} target="_blank" rel="noopener noreferrer">See it on GitHub</a>
+					? <a className="site button" href={props.github} target="_blank" rel="noopener noreferrer" aria-label={`See ${props.title} on GitHub`}>See it on GitHub</a>
 					: <div>
-						<a className="site site-left button" href={props.github} target="_blank" rel="noopener noreferrer">See it on GitHub</a>
-						<a className="site site-right button" href={props.site} target="_blank" rel="noopener noreferrer">Try it out!</a>
+						<a className="site site-left button" href={props.github} target="_blank" rel="noopener noreferrer" aria-label={`See ${props.title} on GitHub`}>See it on GitHub</a>
+						<a className="site site-right button" href={props.site} target="_blank" rel="noopener noreferrer" aria-label={`Try out ${props.title}`}>Try it out!</a>
 					  </div>
 				}
 			</div>

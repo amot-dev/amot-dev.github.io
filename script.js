@@ -36,7 +36,7 @@ function scrollFunction() {
 				if (title.offsetWidth + buttons.offsetWidth < viewportWidth) {
 					buttons.classList.remove('display-transitioning');
 				}
-				// If there's no room, check again on next animation frame
+				// If there's no room, wait a bit and check again
 				else {
 						requestAnimationFrame(checkWidth);
 					}
@@ -59,7 +59,7 @@ function scrollFunction() {
 					if (title.offsetWidth + buttons.offsetWidth > viewportWidth) {
 						buttons.classList.remove('display-transitioning');
 					}
-					// If there's still room, check again on next animation frame
+					// If there's still room, wait a bit and check again
 					else {
 							requestAnimationFrame(checkWidth);
 						}
@@ -162,9 +162,10 @@ function renderProjects(data) {
 		var github = _ref.github;
 		var site = _ref.site;
 		var photo = _ref.photo;
+		var alt = _ref.alt;
 		var description = _ref.description;
 
-		return React.createElement(Project, { key: title, visible: visible, title: title, lang: language, github: github, site: site, photo: photo, desc: description });
+		return React.createElement(Project, { key: title, visible: visible, title: title, lang: language, github: github, site: site, photo: photo, alt: alt, desc: description });
 	});
 	root.render(elements);
 }
@@ -231,23 +232,23 @@ function Project(props) {
 					props.lang
 				)
 			),
-			props.photo != "" && React.createElement('img', { className: 'featured-image', src: props.photo, onLoad: handleImageLoad }),
+			props.photo != "" && React.createElement('img', { className: 'featured-image', src: props.photo, alt: props.alt, onLoad: handleImageLoad }),
 			React.createElement('p', { className: 'desc', dangerouslySetInnerHTML: { __html: props.desc.replace(/\\n/g, '<br />') } }),
 			props.site == "" ? React.createElement(
 				'a',
-				{ className: 'site button', href: props.github, target: '_blank', rel: 'noopener noreferrer' },
+				{ className: 'site button', href: props.github, target: '_blank', rel: 'noopener noreferrer', 'aria-label': 'See ' + props.title + ' on GitHub' },
 				'See it on GitHub'
 			) : React.createElement(
 				'div',
 				null,
 				React.createElement(
 					'a',
-					{ className: 'site site-left button', href: props.github, target: '_blank', rel: 'noopener noreferrer' },
+					{ className: 'site site-left button', href: props.github, target: '_blank', rel: 'noopener noreferrer', 'aria-label': 'See ' + props.title + ' on GitHub' },
 					'See it on GitHub'
 				),
 				React.createElement(
 					'a',
-					{ className: 'site site-right button', href: props.site, target: '_blank', rel: 'noopener noreferrer' },
+					{ className: 'site site-right button', href: props.site, target: '_blank', rel: 'noopener noreferrer', 'aria-label': 'Try out ' + props.title },
 					'Try it out!'
 				)
 			)
