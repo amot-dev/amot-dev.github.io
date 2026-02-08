@@ -110,9 +110,8 @@ nav {
 	text-decoration: none;
 	vertical-align: middle;
 	white-space: nowrap;
-	line-height: 1;
 	color: inherit;
-	background-color: #b5d854;
+	background-color: inherit;
 	cursor: pointer;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -131,14 +130,27 @@ nav {
 	font-size: 1.5rem;
 }
 
+.nav-links {
+	display: block;
+	background-color: #b5d854;
+	white-space: nowrap;
+}
+
 .social-group {
 	display: block;
 	white-space: nowrap;
 }
 
 @media (min-width: 551px) {
+	#buttons.scrolled .nav-links,
 	#buttons.scrolled .social-group {
 		display: inline-block;
+		background-color: transparent;
+	}
+
+	/* When scrolled and inline, re-apply background to buttons individually */
+	#buttons.scrolled .button {
+		background-color: #b5d854;
 	}
 }
 
@@ -147,6 +159,7 @@ nav {
 	padding: 0.65625rem 0.5rem;
 	/* Fix for extra height added by vertical alignment of SVG */
 	line-height: 0;
+	background-color: #b5d854;
 }
 
 .social-icon {
