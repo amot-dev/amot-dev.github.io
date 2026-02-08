@@ -110,6 +110,7 @@ nav {
 	text-decoration: none;
 	vertical-align: middle;
 	white-space: nowrap;
+	line-height: 1;
 	color: inherit;
 	background-color: inherit;
 	cursor: pointer;
@@ -125,14 +126,25 @@ nav {
 	background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
 }
 
-#buttons > .button {
+#buttons .button {
 	font-family: 'Chakra Petch', sans-serif;
 	font-size: 1.5rem;
 }
 
+.social-group {
+	display: block;
+	white-space: nowrap;
+}
+
+@media (min-width: 651px) {
+	#buttons.scrolled .social-group {
+		display: inline-block;
+	}
+}
+
 .social {
 	vertical-align: middle;
-	padding: 0.35rem 0.5rem;
+	padding: 0.5rem;
 	/* Fix for extra height added by vertical alignment of SVG */
 	line-height: 0;
 }
@@ -141,12 +153,6 @@ nav {
 	width: 1.5rem;
 	height: 1.5rem;
 	fill: #000000;
-}
-
-@media (prefers-color-scheme: dark) {
-	.social-icon {
-		fill: #ffffff;
-	}
 }
 
 #subtitle {
