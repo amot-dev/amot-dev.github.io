@@ -161,7 +161,7 @@ nav {
 }
 
 #reactapp {
-	display: inline-flex;
+	display: flex;
 	flex-wrap: wrap;
 }
 
@@ -194,7 +194,8 @@ nav {
 }
 
 .grid-item {
-	float: left;
+	display: flex;
+	flex-direction: column;
 	width: 100%;
 	padding: 0.5rem 1rem;
 }
@@ -216,6 +217,9 @@ nav {
 	border: 0.2rem solid #b5d854;
 	box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
 	transition: transform 0.25s ease-in-out;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 }
 
 .card:hover {
@@ -261,6 +265,7 @@ nav {
 	text-align: justify;
 	hyphens: auto;
 	color: #404040;
+	flex-grow: 1;
 }
 
 @media (prefers-color-scheme: dark) {
