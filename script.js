@@ -36,7 +36,7 @@ function scrollFunction() {
 				if (title.offsetWidth + buttons.offsetWidth < viewportWidth) {
 					buttons.classList.remove('display-transitioning');
 				}
-				// If there's no room, check again on next animation frame
+				// If there's no room, wait a bit and check again
 				else {
 						requestAnimationFrame(checkWidth);
 					}
@@ -59,7 +59,7 @@ function scrollFunction() {
 					if (title.offsetWidth + buttons.offsetWidth > viewportWidth) {
 						buttons.classList.remove('display-transitioning');
 					}
-					// If there's still room, check again on next animation frame
+					// If there's still room, wait a bit and check again
 					else {
 							requestAnimationFrame(checkWidth);
 						}
@@ -108,13 +108,43 @@ function setEqualHeight() {
 		}
 
 		// Set all description heights in a row such that the cards in that row are the same height
+		var descriptions = [];
 		for (var i = start; i < end && i < gridItems.length; i++) {
 			var card = gridItems[i].querySelector('.card');
 			var desc = gridItems[i].querySelector('.desc');
-			desc.style.height = maxHeight + desc.offsetHeight - card.offsetHeight + 'px';
+			descriptions.push({
+				element: desc,
+				height: maxHeight + desc.offsetHeight - card.offsetHeight
+			});
 		}
 
-		// Move to next row
+		var _iteratorNormalCompletion = true;
+		var _didIteratorError = false;
+		var _iteratorError = undefined;
+
+		try {
+			for (var _iterator = descriptions[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+				var desc = _step.value;
+
+				desc.element.style.height = desc.height + 'px';
+			}
+
+			// Move to next row
+		} catch (err) {
+			_didIteratorError = true;
+			_iteratorError = err;
+		} finally {
+			try {
+				if (!_iteratorNormalCompletion && _iterator['return']) {
+					_iterator['return']();
+				}
+			} finally {
+				if (_didIteratorError) {
+					throw _iteratorError;
+				}
+			}
+		}
+
 		maxHeight = 0;
 		start = end;
 	}
@@ -132,9 +162,10 @@ function renderProjects(data) {
 		var github = _ref.github;
 		var site = _ref.site;
 		var photo = _ref.photo;
+		var alt = _ref.alt;
 		var description = _ref.description;
 
-		return React.createElement(Project, { key: title, visible: visible, title: title, lang: language, github: github, site: site, photo: photo, desc: description });
+		return React.createElement(Project, { key: title, visible: visible, title: title, lang: language, github: github, site: site, photo: photo, alt: alt, desc: description });
 	});
 	root.render(elements);
 }
@@ -201,7 +232,7 @@ function Project(props) {
 					props.lang
 				)
 			),
-			props.photo != "" && React.createElement('img', { className: 'featured-image', src: props.photo, onLoad: handleImageLoad }),
+			props.photo != "" && React.createElement('img', { className: 'featured-image', src: props.photo, alt: props.alt, onLoad: handleImageLoad }),
 			React.createElement('p', { className: 'desc', dangerouslySetInnerHTML: { __html: props.desc.replace(/\\n/g, '<br />') } }),
 			props.site == "" ? React.createElement(
 				'a',
