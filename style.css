@@ -60,6 +60,7 @@ nav {
 
 #title.scrolled {
 	font-size: 1.5rem;
+	padding: 0.53125rem 1rem;
 }
 
 @media (min-width: 551px) {
