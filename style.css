@@ -60,15 +60,16 @@ nav {
 
 #title.scrolled {
 	font-size: 1.5rem;
+	padding: 0.53125rem 1rem;
 }
 
-@media (min-width: 651px) {
+@media (min-width: 551px) {
 	#title.scrolled {
 		display: inline-block;
 	}
 }
 
-@media (min-width: 906px) {
+@media (min-width: 806px) {
 	#title:not(.scrolled) {
 		display: inline-block;
 	}
@@ -77,17 +78,17 @@ nav {
 #buttons {
 	display: block;
 	vertical-align: top; /* Needed, despite what your IDE may tell you */
-	background-color: #b5d854;
+	background-color: transparent;
 	transition: 0.2s;
 }
 
-@media (min-width: 651px) {
+@media (min-width: 551px) {
 	#buttons.scrolled {
 		display: inline-block;
 	}
 }
 
-@media (min-width: 906px) {
+@media (min-width: 806px) {
 	#buttons:not(.scrolled) {
 		display: inline-block;
 	}
@@ -104,7 +105,7 @@ nav {
 .button {
 	display: inline-block;
 	overflow: hidden;
-	padding: 0.5rem;
+	padding: 0.65625rem 0.5rem;
 	border: none;
 	text-align: center;
 	text-decoration: none;
@@ -125,28 +126,47 @@ nav {
 	background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
 }
 
-#buttons > .button {
+#buttons .button {
 	font-family: 'Chakra Petch', sans-serif;
 	font-size: 1.5rem;
 }
 
+.nav-links {
+	display: block;
+	background-color: #b5d854;
+	white-space: nowrap;
+}
+
+.social-group {
+	display: block;
+	white-space: nowrap;
+}
+
+@media (min-width: 551px) {
+	#buttons.scrolled .nav-links,
+	#buttons.scrolled .social-group {
+		display: inline-block;
+		background-color: transparent;
+	}
+
+	/* When scrolled and inline, re-apply background to buttons individually */
+	#buttons.scrolled .button {
+		background-color: #b5d854;
+	}
+}
+
 .social {
 	vertical-align: middle;
-	padding: 0.35rem 0.5rem;
+	padding: 0.65625rem 0.5rem;
 	/* Fix for extra height added by vertical alignment of SVG */
 	line-height: 0;
+	background-color: #b5d854;
 }
 
 .social-icon {
 	width: 1.5rem;
 	height: 1.5rem;
 	fill: #000000;
-}
-
-@media (prefers-color-scheme: dark) {
-	.social-icon {
-		fill: #ffffff;
-	}
 }
 
 #subtitle {
