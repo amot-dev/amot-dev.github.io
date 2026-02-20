@@ -93,10 +93,10 @@ const LANGUAGE_COLORS = {
 	"JS": {color: "#ffd54f"},			// Amber 300
 	"Python": {color: "#7986cb"},		// Indigo 300
 	"VHDL": {color: "#9575cd"}		// Deep Purple 300
-};
+}
 
 function setTextColor(language) {
-	return LANGUAGE_COLORS[language];
+	return LANGUAGE_COLORS[language]
 }
 
 // Define React Component
