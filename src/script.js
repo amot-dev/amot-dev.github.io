@@ -84,16 +84,20 @@ function renderProjects(data) {
 fetch("./projects.json").then(response => response.json()).then(obj => renderProjects(obj))
 
 // Format text color for various prgramming languages or frameworks
+const LANGUAGE_COLORS = {
+	"Arduino": {color: "#4db6ac"},	// Teal 300
+	"Assembly": {color: "#90a4ae"},	// Blue Gray 300
+	"Bash": {color: "#aed581"},		// Light Green 300
+	"C++": {color: "#f06292"},		// Pink 300
+	"Flutter": {color: "#4dd0e1"},	// Cyan 300
+	"Java": {color: "#ff8a65"},		// Deep Orange 300
+	"JS": {color: "#ffd54f"},		// Amber 300
+	"Python": {color: "#7986cb"},	// Indigo 300
+	"VHDL": {color: "#9575cd"}		// Deep Purple 300
+};
+
 function setTextColor(language) {
-	if (language == "Arduino") return {color: "#4db6ac"}	// Teal 300
-	if (language == "Assembly") return {color: "#90a4ae"}	// Blue Gray 300
-	if (language == "Bash") return {color: "#aed581"}		// Light Green 300
-	if (language == "C++") return {color: "#f06292"}		// Pink 300
-	if (language == "Flutter") return {color: "#4dd0e1"}	// Cyan 300
-	if (language == "Java") return {color: "#ff8a65"}		// Deep Orange 300
-	if (language == "JS") return {color: "#ffd54f"}			// Amber 300
-	if (language == "Python") return {color: "#7986cb"}		// Indigo 300
-	if (language == "VHDL") return {color: "#9575cd"}		// Deep Purple 300
+	return LANGUAGE_COLORS[language];
 }
 
 // Define React Component
