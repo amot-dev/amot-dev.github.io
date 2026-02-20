@@ -96,10 +96,6 @@ const LANGUAGE_COLORS = {
 	"VHDL": {color: "#9575cd"}		// Deep Purple 300
 };
 
-function setTextColor(language) {
-	return LANGUAGE_COLORS[language];
-}
-
 // Define React Component
 function Project(props) {
 	// Skip rendering elements not set to visible and elements with an empty description
@@ -111,7 +107,7 @@ function Project(props) {
 			<div className="card">
 				<div className="info">
 					<h3 className="title">{props.title}</h3>
-					<h3 className="language" style={setTextColor(props.lang)}>{props.lang}</h3>
+					<h3 className="language" style={LANGUAGE_COLORS[props.lang]}>{props.lang}</h3>
 				</div>
 				{props.photo != "" &&
 					<img className="featured-image" src={props.photo} alt={props.alt} loading="lazy" decoding="async" width={props.width} height={props.height}></img>

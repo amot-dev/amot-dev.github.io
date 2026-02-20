@@ -140,9 +140,6 @@ const LANGUAGE_COLORS = {
     color: "#9575cd"
   } // Deep Purple 300
 };
-function setTextColor(language) {
-  return LANGUAGE_COLORS[language];
-}
 
 // Define React Component
 function Project(props) {
@@ -160,7 +157,7 @@ function Project(props) {
     className: "title"
   }, props.title), /*#__PURE__*/React.createElement("h3", {
     className: "language",
-    style: setTextColor(props.lang)
+    style: LANGUAGE_COLORS[props.lang]
   }, props.lang)), props.photo != "" && /*#__PURE__*/React.createElement("img", {
     className: "featured-image",
     src: props.photo,
