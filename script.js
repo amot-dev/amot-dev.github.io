@@ -6,6 +6,7 @@
 */
 var title = document.getElementById('title');
 var buttons = document.getElementById('buttons');
+const transitionMediaQuery = window.matchMedia('(min-width: 651px) and (max-width: 905px)');
 let ticking = false;
 window.onscroll = function () {
   if (!ticking) {
@@ -21,7 +22,7 @@ function scrollFunction() {
   if (document.body.scrollTop > 0.8 * window.innerHeight || document.documentElement.scrollTop > 0.8 * window.innerHeight) {
     // Need to transition display style between 651px and 905px (done by making buttons transparent during display change)
     // This is because between those sizes, the navbar needs to move from inline to a new row or vice versa
-    if (window.matchMedia('(min-width: 651px) and (max-width: 905px)').matches && !buttons.classList.contains('scrolled')) {
+    if (transitionMediaQuery.matches && !buttons.classList.contains('scrolled')) {
       // Start scroll animation
       buttons.classList.add('display-transitioning');
       title.classList.add('scrolled');
@@ -44,7 +45,7 @@ function scrollFunction() {
   }
   // Scrolling up
   else {
-    if (window.matchMedia('(min-width: 651px) and (max-width: 905px)').matches && buttons.classList.contains('scrolled')) {
+    if (transitionMediaQuery.matches && buttons.classList.contains('scrolled')) {
       // Start scroll animation
       buttons.classList.add('display-transitioning');
       title.classList.remove('scrolled');
