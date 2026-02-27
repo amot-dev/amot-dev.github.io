@@ -8,6 +8,8 @@
             "github": "https://github.com/amot-dev/mototwist",
             "site": "",
             "photo": "img/projects/mototwist.png",
+            "width": 1908,
+            "height": 920,
             "alt": "A screenshot of MotoTwist, depicting the main UI elements, the map and the sidebar, and focused on a 'Twist' in Istanbul. Ratings are shown for this 'Twist' in various categories."
         },
         {
@@ -18,6 +20,8 @@
             "github": "https://github.com/amot-dev/endshards",
             "site": "/endshards",
             "photo": "img/projects/endshards.png",
+            "width": 1920,
+            "height": 1057,
             "alt": "A Minecraft screenshot of a display of all the items, blocks, and armours added to the game by Endshards."
         },
         {
@@ -28,6 +32,8 @@
             "github": "https://github.com/amot-dev/timestamp",
             "site": "https://aur.archlinux.org/packages/timestamp",
             "photo": "img/projects/timestamp.png",
+            "width": 1908,
+            "height": 1036,
             "alt": "A screenshot of a terminal running Timestamp in interactive mode. It shows off the various ways Timestamp can be used."
         },
         {
@@ -38,6 +44,8 @@
             "github": "https://github.com/amot-dev/cursed-table-revamped",
             "site": "https://modrinth.com/mod/cursed-table-revamped",
             "photo": "img/projects/cursed-table-revamped.png",
+            "width": 1920,
+            "height": 1057,
             "alt": "A Minecraft screenshot showing the player adding a curse to a pair of Diamond Boots via the Enchanting Table, functionality added by this mod."
         },
         {
@@ -48,6 +56,8 @@
             "github": "https://github.com/christophertesar/wec_2024",
             "site": "",
             "photo": "img/projects/ez-note.png",
+            "width": 1920,
+            "height": 1080,
             "alt": "A screenshot of the main Ez-Note UI, showing two uploaded notes and the options that can be taken for them."
         },
         {
@@ -58,6 +68,8 @@
             "github": "https://github.com/amot-dev/RescueReady",
             "site": "",
             "photo": "img/projects/rescue-ready.png",
+            "width": 1914,
+            "height": 984,
             "alt": "A screenshot of the main page of RescueReady, showing the main possible functions of the prototype app."
         },
         {
@@ -68,6 +80,8 @@
             "github": "https://github.com/amot-dev/star-trek-episodes",
             "site": "/star-trek-episodes",
             "photo": "img/projects/star-trek-episodes.png",
+            "width": 1919,
+            "height": 668,
             "alt": "A screenshot of the Star Trek Episodes site, showcasing the filtering ability in action."
         },
         {
@@ -78,6 +92,8 @@
             "github": "https://github.com/amot-dev/2048",
             "site": "/2048",
             "photo": "img/projects/2048.png",
+            "width": 959,
+            "height": 503,
             "alt": "A screenshot of my custom 2048 game implementation."
         },
         {

@@ -75,8 +75,8 @@ function scrollFunction() {
 function renderProjects(data) {
     const root = ReactDOM.createRoot(document.getElementById('reactapp'))
     let elements = []
-    elements = data.projects.map(({visible, title, description, language, github, site, photo, alt}, index) => {
-        return <Project key={title} visible={visible} title={title} desc={description} lang={language} github={github} site={site} photo={photo} alt={alt} />
+    elements = data.projects.map(({visible, title, description, language, github, site, photo, width, height, alt}, index) => {
+        return <Project key={title} visible={visible} title={title} desc={description} lang={language} github={github} site={site} photo={photo} width={width} height={height} alt={alt} />
     })
     root.render(elements);
 }
@@ -129,11 +129,12 @@ function Project(props) {
                         {/* Fallback */}
                         <img
                             src={props.photo}
+                            width={props.width}
+                            height={props.height}
                             alt={props.alt}
                             className="featured-image"
                             loading="lazy"
                             decoding="async"
-                            style={{ width: '100%', height: 'auto' }}
                         />
                     </picture>
                 }

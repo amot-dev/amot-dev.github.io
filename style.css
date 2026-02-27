@@ -15,6 +15,7 @@ nav, footer {
 }
 
 body {
+    background-color: #1a1b1e;  /* Average color of image until the image itself loads */
     background-image: url('img/home.webp');
     background-attachment: fixed;
     background-position: center;
