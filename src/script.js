@@ -75,8 +75,8 @@ function scrollFunction() {
 function renderProjects(data) {
 	const root = ReactDOM.createRoot(document.getElementById('reactapp'))
 	let elements = []
-	elements = data.projects.map(({visible, title, language, github, site, photo, alt, description, width, height}, index) => {
-		return <Project key={title} visible={visible} title={title} lang={language} github={github} site={site} photo={photo} alt={alt} desc={description} width={width} height={height} />
+	elements = data.projects.map(({visible, title, description, language, github, site, photo, alt}, index) => {
+		return <Project key={title} visible={visible} title={title} desc={description} lang={language} github={github} site={site} photo={photo} alt={alt} />
 	})
 	root.render(elements);
 }
@@ -95,10 +95,18 @@ const LANGUAGE_COLORS = {
 	"VHDL": {color: "#9575cd"}		// Deep Purple 300
 };
 
+// Different widths available for photos
+const PHOTO_WIDTHS = [400, 800, 1200];
+
 // Define React Component
 function Project(props) {
 	// Skip rendering elements not set to visible and elements with an empty description
 	if (props.visible == "false" || props.desc == "") return null;
+
+	const photoBase = props.photo.replace(/\.[^/.]+$/, "");
+
+	const getSrcSet = (ext) =>
+   		PHOTO_WIDTHS.map(w => `${photoBase}-${w}.${ext} ${w}w`).join(', ');
 
 	// Template for cards
 	return (
@@ -109,7 +117,25 @@ function Project(props) {
 					<h3 className="language" style={LANGUAGE_COLORS[props.lang]}>{props.lang}</h3>
 				</div>
 				{props.photo != "" &&
-					<img className="featured-image" src={props.photo} alt={props.alt} loading="lazy" decoding="async" width={props.width} height={props.height}></img>
+					<picture>
+						{/* Browser checks these first */}
+						<source type="image/avif" srcSet={getSrcSet('avif')}
+							sizes="(min-width: 1000px) 33vw, (min-width: 600px) 50vw, 100vw"
+						/>
+						<source type="image/webp" srcSet={getSrcSet('webp')}
+							sizes="(min-width: 1000px) 33vw, (min-width: 600px) 50vw, 100vw"
+						/>
+
+						{/* Fallback */}
+						<img
+							src={props.photo}
+							alt={props.alt}
+							className="featured-image"
+							loading="lazy"
+							decoding="async"
+							style={{ width: '100%', height: 'auto' }}
+						/>
+					</picture>
 				}
 				
 				<p className="desc" dangerouslySetInnerHTML={{ __html: props.desc.replace(/\\n/g, '<br />') }}></p>
