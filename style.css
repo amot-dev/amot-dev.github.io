@@ -62,13 +62,13 @@ nav {
 	font-size: 1.5rem;
 }
 
-@media (min-width: 651px) {
+@media (min-width: 684px) {
 	#title.scrolled {
 		display: inline-block;
 	}
 }
 
-@media (min-width: 906px) {
+@media (min-width: 977px) {
 	#title:not(.scrolled) {
 		display: inline-block;
 	}
@@ -81,13 +81,13 @@ nav {
 	transition: 0.2s;
 }
 
-@media (min-width: 651px) {
+@media (min-width: 684px) {
 	#buttons.scrolled {
 		display: inline-block;
 	}
 }
 
-@media (min-width: 906px) {
+@media (min-width: 977px) {
 	#buttons:not(.scrolled) {
 		display: inline-block;
 	}
@@ -125,28 +125,41 @@ nav {
 	background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
 }
 
-#buttons > .button {
+#buttons > .button:not(.social) {
 	font-family: 'Chakra Petch', sans-serif;
 	font-size: 1.5rem;
 }
 
 .social {
-	vertical-align: middle;
-	padding: 0.35rem 0.5rem;
-	/* Fix for extra height added by vertical alignment of SVG */
 	line-height: 0;
 }
 
 .social-icon {
-	width: 1.5rem;
-	height: 1.5rem;
+	height: 33px;
 	fill: #000000;
 }
 
-@media (prefers-color-scheme: dark) {
-	.social-icon {
-		fill: #ffffff;
-	}
+@media (max-width: 475px) {
+    #buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #buttons .button:not(.social) {
+        order: 1;
+    }
+
+    #buttons::before {
+        content: "";
+        order: 2;
+        flex-basis: 100%;
+        height: 0;
+    }
+
+    #buttons .social {
+        order: 3;
+    }
 }
 
 #subtitle {

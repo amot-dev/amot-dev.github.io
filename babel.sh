@@ -1,1 +1,1 @@
-npx babel src/script.js --out-file script.js --presets @babel/preset-react
+npx babel src/script.js --out-file /dev/stdout --presets @babel/preset-react | npx terser --compress --mangle --output script.js

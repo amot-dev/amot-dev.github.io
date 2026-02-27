@@ -1,12 +1,11 @@
 /* 	Scroll Animations
 	Some important screen widths (need to be updated if header is updated, here and in CSS):
-		- Minimum size to fit navbar and title in one row when not scrolled: 906px
-		- Minimum size to fit navbar and title in one row when scrolled: 651px
-		- Minimum size to fit navbar in one row: 466px
+		- Minimum size to fit navbar and title in one row when not scrolled: 977px
+		- Minimum size to fit navbar and title in one row when scrolled: 684px
 */
 var title = document.getElementById('title');
 var buttons = document.getElementById('buttons');
-const transitionMediaQuery = window.matchMedia('(min-width: 651px) and (max-width: 905px)');
+const transitionMediaQuery = window.matchMedia('(min-width: 684px) and (max-width: 976px)');
 
 let ticking = false;
 window.onscroll = function() {
@@ -22,7 +21,7 @@ function scrollFunction() {
 
 	// Scrolling down
 	if (document.body.scrollTop > 0.8 * window.innerHeight || document.documentElement.scrollTop > 0.8 * window.innerHeight) {
-		// Need to transition display style between 651px and 905px (done by making buttons transparent during display change)
+		// Need to transition display style when between transition sizes (done by making buttons transparent during display change)
 		// This is because between those sizes, the navbar needs to move from inline to a new row or vice versa
 		if (transitionMediaQuery.matches && !buttons.classList.contains('scrolled')) {
 			// Start scroll animation
