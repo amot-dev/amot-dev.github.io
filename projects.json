@@ -6,7 +6,7 @@
             "description": "MotoTwist is a self-hosted, containerized service to track and rate motorcycle roads. It allows you to define and rate motorcycle roads, both paved and unpaved, on various criteria. Weather conditions at the time of ride are also recorded: maybe a rainy day ruined a certain ride, but it's amazing in the sun!\\n\\nStarted as a simple hobby project for me to keep track of my own favourite motorcycle roads, I quickly realized that beyond forums and some curated print media, there isn't a great place for motorcylists to share the hidden gems around them. So, I made it.\\n\\nMotoTwist has support for multiple users, advanced filters help anyone find the exact road for them and the current conditions, and an ability to export it all to GPX and take it with you! Anyone can deploy an instance within minutes via Docker, and plans are underway for a central deployment.",
             "language": "Python",
             "github": "https://github.com/amot-dev/mototwist",
-            "site": "",
+            "site": "https://docs.mototwist.app",
             "photo": "img/projects/mototwist.png",
             "width": 1908,
             "height": 920,
