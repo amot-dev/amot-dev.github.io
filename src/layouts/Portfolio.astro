@@ -1,0 +1,162 @@
+---
+import '../components/GlobalStyles.astro';
+
+import Footer from '../components/Footer.astro';
+import Nav from '../components/Nav.astro';
+
+
+interface Project {
+  title: string;
+  visible: string;
+  description: string[];
+  language: string;
+  github: string;
+  site: string;
+  photo: string;
+  width: number;
+  height: number;
+  alt: string;
+}
+
+interface Props {
+  frontmatter: {
+    layout: string;
+    author: string;
+    hero: {
+      subtitle: string;
+    };
+    about: {
+      paragraphs: string[];
+    };
+    projects: Project[];
+    contact: {
+      placeholder: string;
+      formspree_endpoint: string;
+    };
+  };
+}
+
+
+const { frontmatter } = Astro.props;
+
+// Format text color for various prgramming languages or frameworks
+const LANGUAGE_COLORS: Record<string, { color: string }> = {
+    "Arduino": {color: "#4db6ac"},  // Teal 300
+    "Assembly": {color: "#90a4ae"}, // Blue Gray 300
+    "Bash": {color: "#aed581"},     // Light Green 300
+    "C++": {color: "#f06292"},      // Pink 300
+    "Flutter": {color: "#4dd0e1"},  // Cyan 300
+    "Java": {color: "#ff8a65"},     // Deep Orange 300
+    "JS": {color: "#ffd54f"},       // Amber 300
+    "Python": {color: "#7986cb"},   // Indigo 300
+    "VHDL": {color: "#9575cd"}      // Deep Purple 300
+};
+
+// Different widths available for photos
+const PHOTO_WIDTHS = [400, 800, 1200];
+
+const getSrcSet = (photo: string, ext: string) => {
+    if (!photo) return '';
+    const photoBase = photo.replace(/\.[^/.]+$/, "");
+    return PHOTO_WIDTHS.map(w => `${photoBase}-${w}.${ext} ${w}w`).join(', ');
+};
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-PXQ0Q7J98J"></script>
+        <script is:inline>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-PXQ0Q7J98J');
+        </script>
+
+        <title>Hey! It's Alex</title>
+        <meta name="description" content="Alexander Mot's personal web portfolio.">
+        <link rel="icon" type="image/png" href="/favicon-32x32.png">
+        <link rel="preload" as="image" href="/home.webp">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preload" as="font" href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed&family=Roboto+Slab&display=swap">
+        <link rel="preload" as="font" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&display=swap">
+    </head>
+    <body>
+        <div class="portfolio-container">
+            <Nav />
+
+            <main>
+                <section id="home" class="hero">
+                    <span id="subtitle">{frontmatter.hero.subtitle}</span>
+                </section>
+
+                <section id="about">
+                    <h2 class="section-title">About Me</h2>
+                    <div class="text about-text">
+                        {frontmatter.about.paragraphs.map((paragraph) => (
+                            <p>{paragraph}</p>
+                        ))}
+                    </div>
+                </section>
+
+                <section id="projects">
+                    <h2 class="section-title">Featured Projects</h2>
+                    <div id="reactapp">
+                        {frontmatter.projects.map((project) => (
+                            project.visible !== 'false' && project.description.length > 0 && (
+                                <div class="grid-item">
+                                    <div class="card">
+                                        <div class="info">
+                                            <h3 class="title">{project.title}</h3>
+                                            <h3 class="language" style={`color: ${LANGUAGE_COLORS[project.language]?.color || 'inherit'}`}>
+                                                {project.language}
+                                            </h3>
+                                        </div>
+
+                                        {project.photo && project.photo !== '' && (
+                                            <picture>
+                                                <source type="image/avif" srcset={getSrcSet(project.photo, 'avif')} sizes="(min-width: 1000px) 33vw, (min-width: 600px) 50vw, 100vw" />
+                                                <source type="image/webp" srcset={getSrcSet(project.photo, 'webp')} sizes="(min-width: 1000px) 33vw, (min-width: 600px) 50vw, 100vw" />
+                                                <img src={project.photo} width={project.width} height={project.height} alt={project.alt} class="featured-image" loading="lazy" decoding="async" />
+                                            </picture>
+                                        )}
+
+                                        <div class="desc">
+                                            {project.description.map((paragraph) => (
+                                                <p>{paragraph}</p>
+                                            ))}
+                                        </div>
+
+                                        <div class="site-group">
+                                            <a class="site button" href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`See ${project.title} on GitHub`}>See it on GitHub</a>
+                                            {project.site !== '' && (
+                                                <a class="site button" href={project.site} target="_blank" rel="noopener noreferrer" aria-label={`Try out ${project.title}`}>Try it out!</a>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        ))}
+                    </div>
+                </section>
+
+                <section id="contact" style="min-height:97.5vh">
+                    <h2 class="section-title">Contact Me</h2>
+                    <form action={frontmatter.contact.formspree_endpoint} method="POST" class="text">
+                        <label class="form-label">Email</label>
+                        <input class="form-input" type="email" name="email" placeholder="yourname@domain.tld" />
+                        <label class="form-label">Message</label>
+                        <textarea class="form-input" name="message" rows="20" placeholder={frontmatter.contact.placeholder}></textarea>
+                        <button class="button form-send" type="submit">Send</button>
+                    </form>
+                </section>
+            </main>
+
+            <Footer name={frontmatter.author} year=2024>
+        </div>
+    </body>
+</html>
