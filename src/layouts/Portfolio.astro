@@ -7,7 +7,7 @@ import Nav from '../components/Nav.astro';
 
 interface Project {
   title: string;
-  visible: string;
+  visible: boolean;
   description: string[];
   language: string;
   github: string;
@@ -49,7 +49,7 @@ const LANGUAGE_COLORS: Record<string, { color: string }> = {
     "Java": {color: "#ff8a65"},     // Deep Orange 300
     "JS": {color: "#ffd54f"},       // Amber 300
     "Python": {color: "#7986cb"},   // Indigo 300
-    "VHDL": {color: "#9575cd"}      // Deep Purple 300
+    "VHDL": {color: "#9575cd"},     // Deep Purple 300
 };
 
 // Different widths available for photos
@@ -107,7 +107,7 @@ const getSrcSet = (photo: string, ext: string) => {
                     <h2 class="section-title">Featured Projects</h2>
                     <div id="reactapp">
                         {frontmatter.projects.map((project) => (
-                            project.visible !== 'false' && project.description.length > 0 && (
+                            project.visible !== false && project.description.length > 0 && (
                                 <div class="grid-item">
                                     <div class="card">
                                         <div class="info">
@@ -160,3 +160,159 @@ const getSrcSet = (photo: string, ext: string) => {
         </div>
     </body>
 </html>
+
+<style>
+    body {
+        background-color: #1a1b1e;  /* Average color of image until the image itself loads */
+        background-image: url('/home.webp');
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .hero {
+        background-color: transparent;
+    }
+
+    #subtitle {
+        position: absolute;
+        bottom: 0;
+        padding: 1rem;
+        font-size: 2.5rem;
+        letter-spacing: 0.2rem;
+        text-shadow: 0.2rem 0.2rem 0 #000000;
+        color: #ffffff;
+        opacity: 0.8;
+    }
+
+    #reactapp {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .about-text p {
+        margin-bottom: 1.5rem;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .grid-item {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 0.5rem 1rem;
+    }
+
+    @media (min-width: 600px) {
+        .grid-item {
+            width: 50%;
+        }
+    }
+
+    @media (min-width: 1000px) {
+        .grid-item {
+            width: 33.33333%;
+        }
+    }
+
+    .card {
+        position: relative;
+        border: 0.2rem solid #b5d854;
+        box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+        transition: transform 0.25s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        &:hover {
+            transform: scale(1.03);
+        }
+    }
+
+    .info {
+        width: 100%;
+        display: flex;
+        color: #404040;
+        background-color: #b5d854;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .info {
+            color: #b5d854;
+            background-color: #000000;
+        }
+    }
+
+    .title {
+        display: inline-block;
+        flex-grow: 1;
+        padding: 0.75rem;
+    }
+
+    .language {
+        display: inline-block;
+        padding: 0.75rem;
+        text-align: right;
+        -webkit-text-stroke: 0.05em #000000;
+    }
+
+    .featured-image {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .desc {
+        padding: 0.5rem 1rem;
+        line-height: 1.5;
+        font-size: 1.1rem;
+        text-align: justify;
+        hyphens: auto;
+        color: #404040;
+        flex-grow: 1;
+
+        p {
+            margin-bottom: 1rem;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .desc {
+            color: #f1f1f1;
+        }
+    }
+
+    .site-group {
+        display: flex;
+        align-content: center;
+        width: 100%;
+    }
+
+    .site {
+        display: flex;
+        flex: 1;
+        justify-content: center;
+        font-size: 1.2rem;
+        text-align: center;
+        color: #404040;
+        background-color: #b5d854;
+    }
+
+    .site:hover {
+        opacity: 0.8;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .site {
+            color: #b5d854;
+            background-color: #000000;
+        }
+    }
+</style>
