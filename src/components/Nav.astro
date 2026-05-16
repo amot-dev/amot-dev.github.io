@@ -32,7 +32,9 @@ const socialLinks = [
     </div>
 </nav>
 
-<style>
+<style lang="scss">
+    @use "../breakpoints.module.scss" as breakpoints;
+
     nav {
         position: fixed;
         top: 0;
@@ -54,13 +56,13 @@ const socialLinks = [
         }
     }
 
-    @media (min-width: 684px) {
+    @media (min-width: breakpoints.$min-width-single-row-scrolled) {
         #title.scrolled {
             display: inline-block;
         }
     }
 
-    @media (min-width: 977px) {
+    @media (min-width: breakpoints.$min-width-single-row-unscrolled) {
         #title:not(.scrolled) {
             display: inline-block;
         }
@@ -88,7 +90,7 @@ const socialLinks = [
         }
     }
 
-    @media (max-width: 475px) {
+    @media (max-width: breakpoints.$max-width-inline-socials) {
         #buttons {
             display: flex;
             flex-wrap: wrap;
@@ -111,13 +113,13 @@ const socialLinks = [
         }
     }
 
-    @media (min-width: 684px) {
+    @media (min-width: breakpoints.$min-width-single-row-scrolled) {
         #buttons.scrolled {
             display: inline-block;
         }
     }
 
-    @media (min-width: 977px) {
+    @media (min-width: breakpoints.$min-width-single-row-unscrolled) {
         #buttons:not(.scrolled) {
             display: inline-block;
         }
@@ -134,14 +136,15 @@ const socialLinks = [
 </style>
 
 <script>
-    /* 	Scroll Animations
-        Some important screen widths (need to be updated if header is updated, here and in CSS):
-            - Minimum size to fit navbar and title in one row when not scrolled: 977px
-            - Minimum size to fit navbar and title in one row when scrolled: 684px
-    */
+    // @ts-ignore
+    import breakpoints from '../breakpoints.module.scss';
+
     const title = document.getElementById('title');
     const buttons = document.getElementById('buttons');
-    const transitionMediaQuery = window.matchMedia('(min-width: 684px) and (max-width: 976px)');
+
+    const minWidthSingleRowUnscrolled = parseInt(breakpoints.minWidthSingleRowUnscrolled, 10);
+    const minWidthSingleRowScrolled = parseInt(breakpoints.minWidthSingleRowScrolled, 10);
+    const transitionMediaQuery = window.matchMedia(`(min-width: ${minWidthSingleRowScrolled}px) and (max-width: ${minWidthSingleRowUnscrolled - 1}px)`);
 
     const scrollFunction = () => {
         if (!title || !buttons) return;
@@ -210,4 +213,70 @@ const socialLinks = [
         }
     };
     window.addEventListener('scroll', handleScroll);
+</script>
+
+
+<!-- Dev code to calculate breakpoints -->
+<script>
+    declare global {
+        interface Window {
+            calculateNavBreakpoints: () => string;
+        }
+    }
+
+    // @ts-ignore
+    if (import.meta.env.DEV) {
+        window.calculateNavBreakpoints = function() {
+            const title = document.getElementById('title');
+            const buttons = document.getElementById('buttons');
+
+            if (!title || !buttons) return "Error: Elements not found";
+
+            const wasScrolled = title.classList.contains('scrolled');
+            const originalTitleDisplay = title.style.display;
+            const originalButtonsDisplay = buttons.style.display;
+            const originalButtonsWhiteSpace = buttons.style.whiteSpace;
+            const origButtonsWidth = buttons.style.width;
+            const originalTitleTransition = title.style.transition;
+            const originalButtonsTransition = buttons.style.transition;
+
+            title.style.transition = 'none';
+            buttons.style.transition = 'none';
+            title.style.display = 'inline-block';
+            buttons.style.display = 'inline-block';
+            buttons.style.whiteSpace = 'nowrap';
+            buttons.style.width = 'max-content';
+
+            title.classList.remove('scrolled');
+            buttons.classList.remove('scrolled');
+            const minWidthSingleRowUnscrolled = title.offsetWidth + buttons.offsetWidth + 1;
+
+            title.classList.add('scrolled');
+            buttons.classList.add('scrolled');
+            const minWidthSingleRowScrolled = title.offsetWidth + buttons.offsetWidth + 1;
+
+            const maxWidthInlineSocials = buttons.offsetWidth + 1;
+
+            if (!wasScrolled) {
+                title.classList.remove('scrolled');
+                buttons.classList.remove('scrolled');
+            }
+            title.style.display = originalTitleDisplay;
+            buttons.style.display = originalButtonsDisplay;
+            buttons.style.whiteSpace = originalButtonsWhiteSpace;
+            buttons.style.width = origButtonsWidth;
+            title.style.transition = originalTitleTransition;
+            buttons.style.transition = originalButtonsTransition;
+
+            const output = [
+                `$min-width-single-row-unscrolled: ${minWidthSingleRowUnscrolled}px;`,
+                `$min-width-single-row-scrolled: ${minWidthSingleRowScrolled}px;`,
+                `$max-width-inline-socials: ${maxWidthInlineSocials}px;`
+            ].join('\n');
+
+            console.log(`%c${output}`, 'color: #b5d854; font-family: monospace;');
+
+            return "Copy the above into breakpoints.module.scss"
+        };
+    };
 </script>
