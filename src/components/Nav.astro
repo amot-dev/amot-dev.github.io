@@ -5,10 +5,11 @@ const SOCIAL_ICONS = {
 };
 
 const navLinks = [
-    { text: 'Home', link: '#home' },
-    { text: 'About', link: '#about' },
-    { text: 'Projects', link: '#projects' },
-    { text: 'Contact', link: '#contact' },
+    { text: 'Home', link: '/#' },
+    { text: 'About', link: '/#about' },
+    { text: 'Projects', link: '/#projects' },
+    { text: 'Blog', link: '/#' },
+    { text: 'Contact', link: '/#contact' },
 ];
 
 const socialLinks = [
@@ -44,27 +45,32 @@ const socialLinks = [
 
     #title {
         display: block;
-        padding: 0.5rem 1rem;
+        padding: 0;
         font-family: 'Chakra Petch', sans-serif;
         font-size: 4rem;
+        text-align: center;
         color: #ffffff;
         background-color: #404040;
         transition: 0.5s;
 
+        @mixin single-row-layout {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            text-align: left;
+        }
+
         &.scrolled {
             font-size: 1.5rem;
-        }
-    }
 
-    @media (min-width: breakpoints.$min-width-single-row-scrolled) {
-        #title.scrolled {
-            display: inline-block;
+            @media (min-width: breakpoints.$min-width-single-row-scrolled) {
+                @include single-row-layout;
+            }
         }
-    }
 
-    @media (min-width: breakpoints.$min-width-single-row-unscrolled) {
-        #title:not(.scrolled) {
-            display: inline-block;
+        &:not(.scrolled) {
+            @media (min-width: breakpoints.$min-width-single-row-unscrolled) {
+                @include single-row-layout;
+            }
         }
     }
 
@@ -80,27 +86,66 @@ const socialLinks = [
         background-color: #b5d854;
         transition: 0.2s;
 
-        &.display-transitioning {
-            opacity: 0;
+        > .button {
+            padding: 4px 8px;
         }
 
         > .section-button {
             font-family: 'Chakra Petch', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1rem;
         }
-    }
 
-    @media (max-width: breakpoints.$max-width-inline-socials) {
-        #buttons {
+        > .social-button {
+            line-height: 0;
+        }
+
+        .social-icon {
+            height: 25px;
+            fill: #000000;
+        }
+
+        &.display-transitioning {
+            opacity: 0;
+        }
+
+        @mixin single-row-layout {
+            display: inline-block;
+
+            > .button {
+                padding: 8px;
+            }
+
+            > .section-button {
+                font-size: 1.5rem;
+            }
+
+            .social-icon {
+                height: 33px;
+            }
+        }
+
+        &.scrolled {
+            @media (min-width: breakpoints.$min-width-single-row-scrolled) {
+                @include single-row-layout;
+            }
+        }
+
+        &:not(.scrolled) {
+            @media (min-width: breakpoints.$min-width-single-row-unscrolled) {
+                @include single-row-layout;
+            }
+        }
+
+        @media (max-width: breakpoints.$max-width-inline-socials) {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
 
-            .section-button {
+            > .section-button {
                 order: 1;
             }
 
-            .social-button {
+            > .social-button {
                 order: 3;
             }
 
@@ -111,27 +156,6 @@ const socialLinks = [
                 height: 0;
             }
         }
-    }
-
-    @media (min-width: breakpoints.$min-width-single-row-scrolled) {
-        #buttons.scrolled {
-            display: inline-block;
-        }
-    }
-
-    @media (min-width: breakpoints.$min-width-single-row-unscrolled) {
-        #buttons:not(.scrolled) {
-            display: inline-block;
-        }
-    }
-
-    .social-button {
-        line-height: 0;
-    }
-
-    .social-icon {
-        height: 33px;
-        fill: #000000;
     }
 </style>
 
