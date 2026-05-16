@@ -3,6 +3,7 @@ layout: ../layouts/Portfolio.astro
 author: "Alexander Mot"
 
 hero:
+  title: "Hey! It's Alex."
   subtitle: "Computer Engineer invested in the Future"
 
 about:

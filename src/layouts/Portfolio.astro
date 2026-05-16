@@ -6,16 +6,16 @@ import Nav from '../components/Nav.astro';
 
 
 interface Project {
-  title: string;
-  visible: boolean;
-  description: string[];
-  language: string;
-  github: string;
-  site: string;
-  photo: string;
-  width: number;
-  height: number;
-  alt: string;
+    title: string;
+    visible: boolean;
+    description: string[];
+    language: string;
+    github: string;
+    site: string;
+    photo: string;
+    width: number;
+    height: number;
+    alt: string;
 }
 
 interface Props {
@@ -23,15 +23,16 @@ interface Props {
     layout: string;
     author: string;
     hero: {
-      subtitle: string;
+        title: string;
+        subtitle: string;
     };
     about: {
-      paragraphs: string[];
+        paragraphs: string[];
     };
     projects: Project[];
     contact: {
-      placeholder: string;
-      formspree_endpoint: string;
+        placeholder: string;
+        formspree_endpoint: string;
     };
   };
 }
@@ -76,7 +77,7 @@ const getSrcSet = (photo: string, ext: string) => {
           gtag('config', 'G-PXQ0Q7J98J');
         </script>
 
-        <title>Hey! It's Alex</title>
+        <title>{frontmatter.hero.title}</title>
         <meta name="description" content="Alexander Mot's personal web portfolio.">
         <link rel="icon" type="image/png" href="/favicon-32x32.png">
         <link rel="preload" as="image" href="/home.webp">
