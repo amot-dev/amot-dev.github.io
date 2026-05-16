@@ -1,4 +1,16 @@
 <style is:global>
+    :root {
+        /* Color Palette */
+        --bg-main-light: #F1F1F1;
+        --bg-card-light: #FDFDFD;
+        --bg-main-dark: #1E1E1E;
+        --bg-card-dark: #2B2B2B;
+        --text-light: #404040;
+        --text-dark: #EAEAEA;
+        --accent: #B5D854;
+    }
+
+
     * {
         margin: 0;
         padding: 0;
@@ -20,12 +32,12 @@
         margin-left: auto;
         margin-right: auto;
         padding-top: 1rem;
-        background-color: #ffffff;
-    }
+        color: var(--text-light);
+        background-color: var(--bg-main-light);
 
-    @media (prefers-color-scheme: dark) {
-        section {
-            background-color: #000000;
+        @media (prefers-color-scheme: dark) {
+            color: var(--text-dark);
+            background-color: var(--bg-main-dark);
         }
     }
 
@@ -47,22 +59,19 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-    }
 
-    .button:hover{
-        background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+        &:hover{
+            background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+        }
     }
 
     .section-title {
         padding: 1rem;
         font-size: 2.5rem;
         text-align: center;
-        color: #404040;
-    }
 
-    @media (prefers-color-scheme: dark) {
-        .section-title {
-            color: #b5d854;
+        @media (prefers-color-scheme: dark) {
+            color: var(--accent);
         }
     }
 
@@ -72,24 +81,10 @@
         margin-right: auto;
         padding: 0.01rem 1rem;
         font-size: 1.3rem;
-        color: #404040;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        .text {
-            color: #ffffff;
-        }
     }
 
     .form-label {
         display: block;
-        color: #404040;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        .form-label {
-            color: #ffffff;
-        }
     }
 
     .form-input {
@@ -98,7 +93,12 @@
         margin-top: 0.5rem;
         margin-bottom: 1.0rem;
         border: none;
-        background-color: #f1f1f1;
+        background-color: var(--bg-card-light);
+
+        @media (prefers-color-scheme: dark) {
+            color: var(--text-dark);
+            background-color: var(--bg-card-dark);
+        }
     }
 
     .form-send {
@@ -108,16 +108,14 @@
         border: none;
         font-size: 1.2rem;
         text-align: center;
-        color: #404040;
-        background-color: #b5d854;
-    }
+        background-color: var(--accent);
 
-    @media (prefers-color-scheme: dark) {
-        .form-send {
-            color: #b5d854;
-            background-color: #000000;
+        @media (prefers-color-scheme: dark) {
+            color: var(--accent);
+            background-color: var(--bg-main-dark);
         }
-        .form-send:hover {
+
+        &:hover {
             opacity: 0.8;
         }
     }

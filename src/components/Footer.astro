@@ -9,13 +9,14 @@ const { name, year } = Astro.props;
 <style>
     #copyright {
         text-align: center;
-        color: #f1f1f1;
-        background-color: #404040;
+        color: var(--text-light);
+        background-color: var(--bg-main-light);
     }
 
     @media (prefers-color-scheme: dark) {
         #copyright {
-            background-color: #000000;
+            color: var(--text-dark);
+            background-color: var(--bg-main-dark);
         }
     }
 </style>

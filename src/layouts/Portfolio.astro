@@ -183,8 +183,8 @@ const getSrcSet = (photo: string, ext: string) => {
         padding: 1rem;
         font-size: 2.5rem;
         letter-spacing: 0.2rem;
-        text-shadow: 0.2rem 0.2rem 0 #000000;
-        color: #ffffff;
+        text-shadow: 0.2rem 0.2rem 0 black;
+        color: white;
         opacity: 0.8;
     }
 
@@ -206,28 +206,34 @@ const getSrcSet = (photo: string, ext: string) => {
         flex-direction: column;
         width: 100%;
         padding: 0.5rem 1rem;
-    }
 
-    @media (min-width: 600px) {
-        .grid-item {
+        @media (min-width: 600px) {
             width: 50%;
         }
-    }
 
-    @media (min-width: 1000px) {
-        .grid-item {
+        @media (min-width: 1000px) {
             width: 33.33333%;
         }
     }
 
     .card {
         position: relative;
-        border: 0.2rem solid #b5d854;
-        box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
-        transition: transform 0.25s ease-in-out;
         display: flex;
         flex-direction: column;
         height: 100%;
+        margin: 0.2rem;
+        box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+        color: var(--text-light);
+        background-color: var(--bg-card-light);
+
+        transition: transform 0.25s ease-in-out;
+
+        @media (prefers-color-scheme: dark) {
+            margin: 0;
+            border: 0.2rem solid var(--accent);
+            color: var(--text-dark);
+            background-color: var(--bg-card-dark);
+        }
 
         &:hover {
             transform: scale(1.03);
@@ -237,14 +243,16 @@ const getSrcSet = (photo: string, ext: string) => {
     .info {
         width: 100%;
         display: flex;
-        color: #404040;
-        background-color: #b5d854;
-    }
+        color: var(--text-light);
+        background-color: var(--accent);
 
-    @media (prefers-color-scheme: dark) {
-        .info {
-            color: #b5d854;
-            background-color: #000000;
+        @media (prefers-color-scheme: dark) {
+            color: var(--accent);
+            background-color: var(--bg-card-dark);
+        }
+
+        .language {
+            background-color: var(--bg-card-dark);
         }
     }
 
@@ -258,7 +266,6 @@ const getSrcSet = (photo: string, ext: string) => {
         display: inline-block;
         padding: 0.75rem;
         text-align: right;
-        -webkit-text-stroke: 0.05em #000000;
     }
 
     .featured-image {
@@ -273,7 +280,6 @@ const getSrcSet = (photo: string, ext: string) => {
         font-size: 1.1rem;
         text-align: justify;
         hyphens: auto;
-        color: #404040;
         flex-grow: 1;
 
         p {
@@ -282,12 +288,6 @@ const getSrcSet = (photo: string, ext: string) => {
             &:last-child {
                 margin-bottom: 0;
             }
-        }
-    }
-
-    @media (prefers-color-scheme: dark) {
-        .desc {
-            color: #f1f1f1;
         }
     }
 
@@ -303,18 +303,16 @@ const getSrcSet = (photo: string, ext: string) => {
         justify-content: center;
         font-size: 1.2rem;
         text-align: center;
-        color: #404040;
-        background-color: #b5d854;
-    }
+        color: var(--text-light);
+        background-color: var(--accent);
 
-    .site:hover {
-        opacity: 0.8;
-    }
+        @media (prefers-color-scheme: dark) {
+            color: var(--accent);
+            background-color: var(--bg-card-dark);
+        }
 
-    @media (prefers-color-scheme: dark) {
-        .site {
-            color: #b5d854;
-            background-color: #000000;
+        &::hover {
+            opacity: 0.8;
         }
     }
 </style>
