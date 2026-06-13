@@ -1,0 +1,13 @@
+name: Deploy
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-docs:
+    uses: amot-dev/actions/.github/workflows/deploy-docs.yml@v2
+    with:
+      working_directory: '.'

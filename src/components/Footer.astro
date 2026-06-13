@@ -1,0 +1,22 @@
+---
+const { name, year } = Astro.props;
+---
+
+<footer>
+    <p id="copyright">Copyright &#169; {year}-Present by {name}. All rights reserved.</p>
+</footer>
+
+<style>
+    #copyright {
+        text-align: center;
+        color: var(--text-light);
+        background-color: var(--bg-main-light);
+    }
+
+    @media (prefers-color-scheme: dark) {
+        #copyright {
+            color: var(--text-dark);
+            background-color: var(--bg-main-dark);
+        }
+    }
+</style>

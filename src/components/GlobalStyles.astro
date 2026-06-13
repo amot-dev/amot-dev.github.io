@@ -1,0 +1,118 @@
+<style is:global>
+    :root {
+        /* Color Palette */
+        --bg-main-light: #F1F1F1;
+        --bg-card-light: #FDFDFD;
+        --bg-main-dark: #1E1E1E;
+        --bg-card-dark: #2B2B2B;
+        --text-light: #404040;
+        --text-dark: #EAEAEA;
+        --accent: #B5D854;
+    }
+
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    nav, footer {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    section {
+        min-height: 100vh;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 1rem;
+        color: var(--text-light);
+        background-color: var(--bg-main-light);
+
+        @media (prefers-color-scheme: dark) {
+            color: var(--text-dark);
+            background-color: var(--bg-main-dark);
+        }
+    }
+
+    .button {
+        display: inline-block;
+        overflow: hidden;
+        padding: 0.5rem;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: middle;
+        white-space: nowrap;
+        color: inherit;
+        background-color: inherit;
+        cursor: pointer;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+        &:hover{
+            background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15));
+        }
+    }
+
+    .section-title {
+        padding: 1rem;
+        font-size: 2.5rem;
+        text-align: center;
+
+        @media (prefers-color-scheme: dark) {
+            color: var(--accent);
+        }
+    }
+
+    .text {
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0.01rem 1rem;
+        font-size: 1.3rem;
+    }
+
+    .form-label {
+        display: block;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 0.5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1.0rem;
+        border: none;
+        background-color: var(--bg-card-light);
+
+        @media (prefers-color-scheme: dark) {
+            color: var(--text-dark);
+            background-color: var(--bg-card-dark);
+        }
+    }
+
+    .form-send {
+        display: block;
+        width: 100%;
+        padding: 0.5rem;
+        border: none;
+        font-size: 1.2rem;
+        text-align: center;
+        background-color: var(--accent);
+
+        @media (prefers-color-scheme: dark) {
+            color: var(--accent);
+            background-color: var(--bg-main-dark);
+        }
+    }
+</style>

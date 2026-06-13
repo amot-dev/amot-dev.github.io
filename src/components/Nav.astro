@@ -1,0 +1,318 @@
+---
+interface Props {
+    minified?: boolean;
+}
+
+
+const { minified = false } = Astro.props;
+
+const SOCIAL_ICONS = {
+    github: '<path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>',
+    linkedin: '<svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>',
+};
+
+const navLinks = [
+    { text: 'Home', link: '/#' },
+    { text: 'About', link: '/#about' },
+    { text: 'Projects', link: '/#projects' },
+    { text: 'Blog', link: '/blog' },
+    { text: 'Contact', link: '/#contact' },
+];
+
+const socialLinks = [
+    { icon: 'github', link: 'https://github.com/amot-dev' },
+    { icon: 'linkedin', link: 'https://www.linkedin.com/in/amot-dev/' },
+];
+---
+
+<nav id="nav" data-minified={minified.toString()}>
+    <h1 id="title" class:list={[{ scrolled: minified }]}>Ale<span class="green">x</span>ander <span class="green">Mot</span></h1>
+    <div id="buttons" class:list={[{ scrolled: minified }]}>
+        {navLinks.map((item) => (
+            <a href={item.link} class="button section-button">{item.text}</a>
+        ))}
+
+        {socialLinks.map((social) => (
+            <a href={social.link} class="button social-button" target="_blank" rel="noopener noreferrer" aria-label={social.icon}>
+                <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" set:html={SOCIAL_ICONS[social.icon as keyof typeof SOCIAL_ICONS]}></svg>
+            </a>
+        ))}
+    </div>
+</nav>
+
+<style lang="scss">
+    @use "../breakpoints.module.scss" as breakpoints;
+
+    nav {
+        position: fixed;
+        top: 0;
+        z-index: 1000;
+        font-size: 0;
+    }
+
+    #title {
+        display: block;
+        padding: 0;
+        font-family: 'Chakra Petch', sans-serif;
+        font-size: 4rem;
+        text-align: center;
+        color: #ffffff;
+        background-color: #404040;
+        transition: 0.5s;
+
+        @mixin single-row-layout {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            text-align: left;
+        }
+
+        &.scrolled {
+            font-size: 1.5rem;
+
+            @media (min-width: breakpoints.$min-width-single-row-scrolled) {
+                @include single-row-layout;
+            }
+        }
+
+        &:not(.scrolled) {
+            @media (min-width: breakpoints.$min-width-single-row-unscrolled) {
+                @include single-row-layout;
+            }
+        }
+    }
+
+    .green {
+        font-family: inherit;
+        font-size: inherit;
+        color: #b5d854;
+    }
+
+    #buttons {
+        display: block;
+        vertical-align: top;
+        background-color: #b5d854;
+        transition: 0.2s;
+
+        > .button {
+            padding: 4px 8px;
+        }
+
+        > .section-button {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1rem;
+        }
+
+        > .social-button {
+            line-height: 0;
+        }
+
+        .social-icon {
+            height: 25px;
+            fill: #000000;
+        }
+
+        &.display-transitioning {
+            opacity: 0;
+        }
+
+        @mixin single-row-layout {
+            display: inline-block;
+
+            > .button {
+                padding: 8px;
+            }
+
+            > .section-button {
+                font-size: 1.5rem;
+            }
+
+            .social-icon {
+                height: 31px;
+            }
+        }
+
+        &.scrolled {
+            @media (min-width: breakpoints.$min-width-single-row-scrolled) {
+                @include single-row-layout;
+            }
+        }
+
+        &:not(.scrolled) {
+            @media (min-width: breakpoints.$min-width-single-row-unscrolled) {
+                @include single-row-layout;
+            }
+        }
+
+        @media (max-width: breakpoints.$max-width-inline-socials) {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            > .section-button {
+                order: 1;
+            }
+
+            > .social-button {
+                order: 3;
+            }
+
+            &::before {
+                content: "";
+                order: 2;
+                flex-basis: 100%;
+                height: 0;
+            }
+        }
+    }
+</style>
+
+<script>
+    // @ts-ignore
+    import breakpoints from '../breakpoints.module.scss';
+
+    const nav = document.getElementById('nav');
+    const title = document.getElementById('title');
+    const buttons = document.getElementById('buttons');
+
+    const minWidthSingleRowUnscrolled = parseInt(breakpoints.minWidthSingleRowUnscrolled, 10);
+    const minWidthSingleRowScrolled = parseInt(breakpoints.minWidthSingleRowScrolled, 10);
+    const transitionMediaQuery = window.matchMedia(`(min-width: ${minWidthSingleRowScrolled}px) and (max-width: ${minWidthSingleRowUnscrolled - 1}px)`);
+
+    const scrollFunction = () => {
+        if (!title || !buttons) return;
+
+        const scrollPosition = document.body.scrollTop || document.documentElement.scrollTop;
+        const scrollThreshold = 0.8 * window.innerHeight;
+
+        // Scrolling down
+        if (scrollPosition > scrollThreshold) {
+            // Need to transition display style when between transition sizes (done by making buttons transparent during display change)
+            // This is because between those sizes, the navbar needs to move from inline to a new row or vice versa
+            if (transitionMediaQuery.matches && !buttons.classList.contains('scrolled')) {
+                buttons.classList.add('display-transitioning');
+                title.classList.add('scrolled');
+                buttons.classList.add('scrolled');
+
+                // Wait until there's enough room for both title and navbar before completing button transition
+                const checkWidthSubceeds = () => {
+                    const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+                    if (title.offsetWidth + buttons.offsetWidth < viewportWidth) {
+                        buttons.classList.remove('display-transitioning');
+                    } else {
+                        // If there's no room, check again on the next animation frame
+                        requestAnimationFrame(checkWidthSubceeds);
+                    }
+                };
+                requestAnimationFrame(checkWidthSubceeds);
+            } else {
+                title.classList.add('scrolled');
+                buttons.classList.add('scrolled');
+            }
+        }
+        // Scrolling up
+        else {
+            if (transitionMediaQuery.matches && buttons.classList.contains('scrolled')) {
+                // Start scroll animation
+                buttons.classList.add('display-transitioning');
+                title.classList.remove('scrolled');
+                buttons.classList.remove('scrolled');
+
+                // Wait until there's not enough room for both title and navbar before completing button transition
+                const checkWidthExceeds = () => {
+                    const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+                    if (title.offsetWidth + buttons.offsetWidth > viewportWidth) {
+                        buttons.classList.remove('display-transitioning');
+                    } else {
+                        requestAnimationFrame(checkWidthExceeds);
+                    }
+                };
+                requestAnimationFrame(checkWidthExceeds);
+            } else {
+                title.classList.remove('scrolled');
+                buttons.classList.remove('scrolled');
+            }
+        }
+    };
+
+    let ticking = false;
+    const handleScroll = () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                scrollFunction();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    };
+
+    const minified = nav?.dataset.minified === 'true';
+    if (!minified){
+        window.addEventListener('scroll', handleScroll);
+    }
+</script>
+
+
+<!-- Dev code to calculate breakpoints -->
+<script>
+    declare global {
+        interface Window {
+            calculateNavBreakpoints: () => string;
+        }
+    }
+
+    // @ts-ignore
+    if (import.meta.env.DEV) {
+        window.calculateNavBreakpoints = function() {
+            const title = document.getElementById('title');
+            const buttons = document.getElementById('buttons');
+
+            if (!title || !buttons) return "Error: Elements not found";
+
+            const wasScrolled = title.classList.contains('scrolled');
+            const originalTitleDisplay = title.style.display;
+            const originalButtonsDisplay = buttons.style.display;
+            const originalButtonsWhiteSpace = buttons.style.whiteSpace;
+            const origButtonsWidth = buttons.style.width;
+            const originalTitleTransition = title.style.transition;
+            const originalButtonsTransition = buttons.style.transition;
+
+            title.style.transition = 'none';
+            buttons.style.transition = 'none';
+            title.style.display = 'inline-block';
+            buttons.style.display = 'inline-block';
+            buttons.style.whiteSpace = 'nowrap';
+            buttons.style.width = 'max-content';
+
+            title.classList.remove('scrolled');
+            buttons.classList.remove('scrolled');
+            const minWidthSingleRowUnscrolled = title.offsetWidth + buttons.offsetWidth + 1;
+
+            title.classList.add('scrolled');
+            buttons.classList.add('scrolled');
+            const minWidthSingleRowScrolled = title.offsetWidth + buttons.offsetWidth + 1;
+
+            const maxWidthInlineSocials = buttons.offsetWidth + 1;
+
+            if (!wasScrolled) {
+                title.classList.remove('scrolled');
+                buttons.classList.remove('scrolled');
+            }
+            title.style.display = originalTitleDisplay;
+            buttons.style.display = originalButtonsDisplay;
+            buttons.style.whiteSpace = originalButtonsWhiteSpace;
+            buttons.style.width = origButtonsWidth;
+            title.style.transition = originalTitleTransition;
+            buttons.style.transition = originalButtonsTransition;
+
+            const output = [
+                `$min-width-single-row-unscrolled: ${minWidthSingleRowUnscrolled}px;`,
+                `$min-width-single-row-scrolled: ${minWidthSingleRowScrolled}px;`,
+                `$max-width-inline-socials: ${maxWidthInlineSocials}px;`
+            ].join('\n');
+
+            console.log(`%c${output}`, 'color: #b5d854; font-family: monospace;');
+
+            return "Copy the above into breakpoints.module.scss"
+        };
+    };
+</script>

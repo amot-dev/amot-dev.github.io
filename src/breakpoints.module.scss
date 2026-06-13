@@ -1,0 +1,9 @@
+$min-width-single-row-unscrolled: 986px;
+$min-width-single-row-scrolled: 720px;
+$max-width-inline-socials: 529px;
+
+// Exports the variables directly to JavaScript
+:export {
+  minWidthSingleRowUnscrolled: $min-width-single-row-unscrolled;
+  minWidthSingleRowScrolled: $min-width-single-row-scrolled;
+}
